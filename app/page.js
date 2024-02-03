@@ -1,5 +1,16 @@
+"use client";
+import React, { useState, useEffect } from "react";
 
 export default function Home() {
+    const [items, setItems] = useState([
+        { name: "Coffee", price: 4.95 },
+        { name: "Movie", price: 24.95 },
+        { name: "candy", price: 3.95 },
+        { name: "Lunch", price: 15.95 },
+    ]);
+
+    const [total, setTotal] = useState(0);
+
     return (
         <main className="flex min-h-screen flex-col items-center justify-between sm:p-24 p-4">
             <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -13,6 +24,25 @@ export default function Home() {
                             +{" "}
                         </button>
                     </form>
+                    <ul>
+                        {items.map((item, id) => (
+                            <li key={id} className="my-4 w-full flex justify-between bg-slate-950 text-white">
+                                <div className="p-4 w-full flex justify-between">
+                                    <span className="capitalize">{item.name}</span>
+                                    <span>$ {item.price}</span>
+                                </div>
+                                <button className="ml-8 p-4 border-slate-900 hover:bg-slate-900 w16">X</button>
+                            </li>
+                        ))}
+                    </ul>
+                    {items.length < 1 ? (
+                        ""
+                    ) : (
+                        <div className="flex justify-between p-3 text-white">
+                            <span>Total</span>
+                            <span>$ {total}</span>
+                        </div>
+                    )}
                 </div>
             </div>
         </main>
