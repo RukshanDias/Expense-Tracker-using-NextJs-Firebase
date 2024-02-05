@@ -4,25 +4,20 @@ import { collection, addDoc, getDoc, querySnapshot, query, onSnapshot, doc, dele
 import { db } from "./firebase";
 
 export default function Home() {
-    const [items, setItems] = useState([
-        { name: "Coffee", price: 4.95 },
-        { name: "Movie", price: 24.95 },
-        { name: "candy", price: 3.95 },
-        { name: "Lunch", price: 15.95 },
-    ]);
+    const [items, setItems] = useState([]);
     const [newItem, setNewItem] = useState({ name: "", price: "" });
     const [total, setTotal] = useState(0);
 
     // Add item to DB
     const addItem = async (e) => {
         e.preventDefault();
+        setNewItem({ name: "", price: "" });
         if (newItem.name.trim().length > 0 && newItem.price) {
             // setItems([...items, newItem]); // setting to state
             await addDoc(collection(db, /*table name*/ "items"), {
                 name: newItem.name.trim(),
                 price: newItem.price,
             });
-            setNewItem({ name: "", price: "" });
         }
     };
 
